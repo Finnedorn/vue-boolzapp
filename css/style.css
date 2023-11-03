@@ -15,9 +15,45 @@
 
 /*main*/
 
+i {
+    font-size: 1.3rem;
+    color: var(--color-dark-grey);
+}
+
+img {
+    width: 100%;
+}
+
 #app {
     width: 100%;
     height: 100vh;
     overflow: hidden;
     background: var(--background);
+}
+
+.container {
+    background-color: var(--color-white);
+}
+
+.avatar {
+    background-color: var(--color-headers);
+}
+
+.bg-my-turquoise {
+    background-color: var(--color-notification);
+}
+
+.portrait {
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.bell {
+    background-color: var(--color-white);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
