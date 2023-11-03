@@ -13,7 +13,7 @@
     --background: linear-gradient(180deg, #009688 24.99%, #DCDBD3 25%);
 }
 
-/*main*/
+/*miscellaneous*/
 
 i {
     font-size: 1.3rem;
@@ -22,17 +22,6 @@ i {
 
 img {
     width: 100%;
-}
-
-#app {
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    background: var(--background);
-}
-
-.container {
-    background-color: var(--color-white);
 }
 
 .bg-my-grey {
@@ -45,6 +34,23 @@ img {
 
 .bg-my-img {
     background-image: url(../img/mine.jpg);
+}
+
+/*main*/
+
+#app {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--background);
+}
+
+.container {
+    background-color: var(--color-white);
+}
+
+.input-group-text {
+    background-color: var(--color-white) !important;
 }
 
 .portrait {
