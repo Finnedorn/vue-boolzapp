@@ -15,12 +15,12 @@
 </head>
 
 <body>
-    <div id="app" class="p-3">
-        <div class="container bg-my-white">
+    <div id="app" class="p-4">
+        <div class="container bg-my-white h-100">
             <div class="row flex-nowrap h-100">
-                <div class="col col-md-4 row">
+                <div class="col col-md-4 g-0">
                     <!--avatar-->
-                    <div class="avatar d-flex justify-content-between py-3 col-12 align-items-center">
+                    <div class="bg-my-grey d-flex justify-content-between py-3 ps-3 align-items-center border-end">
                         <div class="d-flex align-items-center">
                             <div class="portrait">
                                 <img src="img/avatar_1.jpg" alt="photo_avatar_of _mine">
@@ -29,14 +29,20 @@
                                 Sofia
                             </h5>
                         </div>
-                        <div class="d-flex">
-                            <i class="fa-solid fa-circle-notch me-4"></i>
-                            <i class="fa-solid fa-message me-4"></i>
-                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        <div class="d-flex align-items-center">
+                            <a href="#">
+                                <i class="fa-solid fa-circle-notch me-4"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fa-solid fa-message me-4"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fa-solid fa-ellipsis-vertical me-4"></i>
+                            </a>
                         </div>
                     </div>
                     <!--barra notifiche-->
-                    <div class="bg-my-turquoise col-12 d-flex py-3">
+                    <div class="bg-my-turquoise d-flex py-3 ps-3">
                         <div class="bell text-center">
                             <i class="fa-solid fa-bell-slash pt-3"></i>
                         </div>
@@ -50,33 +56,80 @@
                         </div>
                     </div>
                     <!--searchbar-->
-                    <div class="input-group flex-nowrap col-12">
-                        <span class="input-group-text" id="addon-wrapping">
+                    <div class="input-group flex-nowrap p-4 avatar">
+                        <span class="input-group-text">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
                         <input type="text" class="form-control" placeholder="cerca..." v-model="searchresults">
                     </div>
-                    <!--chat-->
-                    <div class="col-12 flex-grow-1 overflow-y-auto h0">
-                        <!-- <ul class="list-group list-group-flush overflow-scroll">
-                            <li class="list-group-item list-group-item-action"
+                    <!--chat contacts-->
+                    <div class="flex-grow-1">
+                        <ul class="list-group list-group-flush overflow-auto">
+                            <li class="list-group-item list-group-item-action text-dark"
                             v-for="(el,index) in contacts" :key="contacts.id">
-                                <a href="#" class="d-flex" aria-current="true">
-                                    <div class="border-5 overflow-hidden portrait">
+                                <div class="row g-0 py-2">
+                                    <div class="portrait col-2">
                                         <img :src="el.avatar" :alt="el.name">
                                     </div>
-                                    <div class="d-flex w-100 justify-content-between">
-                                      <h5 class="mb-1">{{el.name}}</h5>
-                                      <small>{{el.messages.date}}</small>
+                                    <div class="col">
+                                        <h5 class="mb-1">
+                                            {{el.name}}
+                                        </h5>
+                                        <small>{{el.messages[el.messages.length -1].message}}</small>
                                     </div>
-                                    <p class="mb-1">{{el.messages.message}}</p>
-                                </a>
-                            </li>
-                        </ul> -->
+                                    <div class="col-2">
+                                        <small class="last-msg-preview">
+                                            {{el.messages[el.messages.length -1].date}}
+                                        </small>
+                                    </div>
+                                </div>
+                            </li> 
+                        </ul>
                     </div>
-
                 </div>
-                <div class="col col-md-8"></div>
+                <!--main chat-->
+                <div class="col col-md-8 d-flex flex-column g-0">
+                    <!--avatar-->
+                    <div class="bg-my-grey d-flex justify-content-between align-items-center py-3">
+                        <div class="d-flex align-items-center">
+                            <div class="portrait ms-2">
+                                <img src="img/avatar_1.jpg" alt="photo_avatar_of _mine">
+                            </div>
+                            <div>
+                                <h5>
+                                    nome utente selzionato
+                                </h5>
+                                <small>
+                                    data ultimo accesso
+                                </small>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <a href="#">
+                                <i class="fa-solid fa-magnifying-glass me-4"></i> 
+                            </a>
+                            <a href="#">
+                                <i class="fa-solid fa-paperclip me-4"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fa-solid fa-ellipsis-vertical me-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--chat-->
+                    <div class="flex-grow-1 overflow-y-auto bg-my-img">
+                    </div>
+                    <!--chat spot-->
+                    <div class="bg-my-grey d-flex justify-content-between align-items-center p-3">
+                        <a href="#">
+                            <i class="fa-regular fa-face-smile me-2"></i>
+                        </a>
+                        <input class="form-control rounded-5" type="text" placeholder="Scrivi un messaggio..." v-model="">
+                        <a href="#">
+                            <i class="fa-solid fa-microphone ms-2"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

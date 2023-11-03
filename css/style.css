@@ -35,7 +35,7 @@ img {
     background-color: var(--color-white);
 }
 
-.avatar {
+.bg-my-grey {
     background-color: var(--color-headers);
 }
 
@@ -43,8 +43,13 @@ img {
     background-color: var(--color-notification);
 }
 
+.bg-my-img {
+    background-image: url(../img/mine.jpg);
+}
+
 .portrait {
     width: 50px;
+    height: 50px;
     border-radius: 50%;
     overflow: hidden;
     margin-right: 10px;
@@ -56,4 +61,8 @@ img {
     height: 50px;
     border-radius: 50%;
     margin-right: 10px;
+}
+
+.last-msg-preview {
+    font-size: 0.5rem;
 }
