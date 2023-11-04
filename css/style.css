@@ -70,5 +70,25 @@ img {
 }
 
 .last-msg-preview {
-    font-size: 0.5rem;
+    font-size: 0.7rem;
 }
+
+/*main-chat*/
+
+.sent {
+    max-width: 300px;
+    margin-left: auto;
+    background-color: var(--color-sent-message);
+}
+
+.msg-date-position {
+    right: 15px;
+    bottom: 10px;
+}
+
+.received {
+    max-width: 300px;
+    margin-right: auto;
+    background-color: var(--color-white);
+}
+

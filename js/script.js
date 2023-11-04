@@ -175,9 +175,12 @@ createApp({
                 }
             ],
             searchresults: '',
+            selectedIndex: 0
         }
     },
     methods: {
-        
+        chatSelector(indice) {
+            this.selectedIndex = indice
+        }
     }
 }).mount('#app');
