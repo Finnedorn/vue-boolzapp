@@ -211,6 +211,11 @@ createApp({
                     el.visible = false
                 }
             });
+        },
+        removeFromMsg(indice) {
+            const deleted = this.contacts[this.selectedIndex].messages.splice(indice, 1);
+            console.log(deleted);
         }
     }
+    
 }).mount('#app');

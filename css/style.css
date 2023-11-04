@@ -36,6 +36,10 @@ img {
     background-image: url(../img/mine.jpg);
 }
 
+.btn {
+    --bs-btn-border-width: 0 !important;
+}
+
 /*main*/
 
 #app {
@@ -82,7 +86,12 @@ img {
 }
 
 .msg-date-position {
-    right: 15px;
+    right: 40px;
+    bottom: 5px;
+}
+
+.msg-toggle-position {
+    right: 10px;
     bottom: 10px;
 }
 
