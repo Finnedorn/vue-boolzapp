@@ -1,3 +1,5 @@
+const actualDateTime = luxon.DateTime;
+const date = actualDateTime.now();
 const {createApp} = Vue;
 
 createApp({
@@ -174,13 +176,41 @@ createApp({
                     ],
                 }
             ],
-            searchresults: '',
-            selectedIndex: 0
+            searchResults: '',
+            selectedIndex: 0,
+            newText: '',
+            newAnswer: 'ma chi ti conosce?'
         }
     },
     methods: {
         chatSelector(indice) {
             this.selectedIndex = indice
+        },
+        addingMsg() {
+            const newMessage = {
+                date: actualDateTime.now().setLocale('it').toLocaleString(actualDateTime.DATETIME_SHORT_WITH_SECONDS),
+                message: this.newText,
+                status: 'sent'
+            }
+            this.contacts[this.selectedIndex].messages.push(newMessage);
+            this.newText= '';
+            setTimeout(()=> {
+                const newMessage = {
+                    date: actualDateTime.now().setLocale('it').toLocaleString(actualDateTime.DATETIME_SHORT_WITH_SECONDS),
+                    message: this.newAnswer,
+                    status: 'received'
+                };
+                this.contacts[this.selectedIndex].messages.push(newMessage);
+            }, 2000)
+        },
+        contactFilter() {
+            this.contacts.forEach(el => {
+                if(el.name.toLowerCase().startsWith(this.searchResults)) {
+                    el.visible = true
+                } else {
+                    el.visible = false
+                }
+            });
         }
     }
 }).mount('#app');
