@@ -20,79 +20,83 @@
             <div class="row flex-nowrap h-100">
                 <!--sidebar-->
                 <div class="col col-md-4 g-0">
-                    <!--avatar-->
-                    <div class="bg-my-grey d-flex justify-content-between py-3 ps-3 align-items-center border-end">
-                        <div class="d-flex align-items-center">
-                            <div class="portrait">
-                                <img src="img/avatar_1.jpg" alt="photo_avatar_of _mine">
-                            </div>
-                            <h5>
-                                Sofia
-                            </h5>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <a href="#">
-                                <i class="fa-solid fa-circle-notch me-4"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa-solid fa-message me-4"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa-solid fa-ellipsis-vertical me-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!--barra notifiche-->
-                    <div class="bg-my-turquoise d-flex py-3 ps-3">
-                        <div class="bell text-center">
-                            <i class="fa-solid fa-bell-slash pt-3"></i>
-                        </div>
-                        <div>
-                            <h5>
-                                Ricevi le notifiche di nuovi messaggi
-                            </h5>
-                            <a href="#" class="fs-6">
-                                Attiva notifiche desktop
-                            </a>
-                        </div>
-                    </div>
-                    <!--searchbar-->
-                    <div class="input-group flex-nowrap p-4 bg-my-grey">
-                        <span class="input-group-text">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </span>
-                        <input type="text" class="form-control" placeholder="cerca..." v-model="searchResults" :keyup="contactFilter()">
-                    </div>
-                    <!--chat contacts-->
-                    <div class="flex-grow-1">
-                        <ul class="list-group list-group-flush overflow-auto">
-                            <li class="list-group-item list-group-item-action text-dark"
-                            v-for="(el,index) in contacts"
-                            :class="{'d-none' : el.visible === false}"
-                            :key="contacts.id" 
-                            @click="chatSelector(index)">
-                                <div class="row g-0 py-2">
-                                    <div class="portrait col-2">
-                                        <img :src="el.avatar" :alt="el.name">
-                                    </div>
-                                    <div class="col">
-                                        <h5 class="mb-1">
-                                            {{el.name}}
-                                        </h5>
-                                        <small>{{el.messages[el.messages.length -1].message}}</small>
-                                    </div>
-                                    <div class="col-2">
-                                        <small class="last-msg-preview">
-                                            {{el.messages[el.messages.length -1].date}}
-                                        </small>
-                                    </div>
+                    <div class="row flex-column h-100 g-0">
+                        <!--avatar-->
+                        <div class="col-12 bg-my-grey d-flex justify-content-between p-3 align-items-center border-end">
+                            <div class="d-flex align-items-center">
+                                <div class="portrait">
+                                    <img src="img/avatar_1.jpg" alt="photo_avatar_of _mine">
                                 </div>
-                            </li> 
-                        </ul>
+                                <h5>
+                                    Sofia
+                                </h5>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <a href="#">
+                                    <i class="fa-solid fa-circle-notch me-4"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa-solid fa-message me-4"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa-solid fa-ellipsis-vertical me-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!--barra notifiche-->
+                        <div class="col-12 bg-my-turquoise py-3 p-3">
+                            <div class="row ps-3 align-items-center">
+                                <div class="bell text-center col-3">
+                                    <i class="fa-solid fa-bell-slash pt-3"></i>
+                                </div>
+                                <div class="col-9">
+                                    <h5>
+                                        Ricevi le notifiche di nuovi messaggi
+                                    </h5>
+                                    <a href="#" class="text-my-small-grey">
+                                        Attiva notifiche desktop
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--searchbar-->
+                        <div class="col-12 input-group p-3 bg-my-grey">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="cerca..." v-model="searchResults" :keyup="contactFilter()">
+                        </div>
+                        <!--chat contacts-->
+                        <div class="col-12 flex-grow-1 overflow-y-auto h0">
+                            <ul class="list-group list-group-flush overflow-auto">
+                                <li class="list-group-item list-group-item-action text-dark"
+                                v-for="(el,index) in contacts"
+                                :class="{'d-none' : el.visible === false}"
+                                :key="contacts.id" 
+                                @click="chatSelector(index)">
+                                    <div class="row py-2 g-0">
+                                        <div class="portrait col-2">
+                                            <img :src="el.avatar" :alt="el.name">
+                                        </div>
+                                        <div class="col">
+                                            <h5 class="mb-1">
+                                                {{el.name}}
+                                            </h5>
+                                            <small class="text-my-small-grey">{{el.messages[el.messages.length -1].message}}</small>
+                                        </div>
+                                        <div class="col-2">
+                                            <small class="text-my-small-grey">
+                                                {{el.messages[el.messages.length -1].date}}
+                                            </small>
+                                        </div>
+                                    </div>
+                                </li> 
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <!--main chat-->
-                <div class="col col-md-8 d-flex flex-column g-0">
+                <div class="col-12 col-md-8 d-flex flex-column g-0">
                     <!--header-->
                     <div class=" bg-my-grey d-flex justify-content-between align-items-center py-3">
                         <div class="d-flex align-items-center">
@@ -122,14 +126,16 @@
                     </div>
                     <!--chat-->
                     <div class="flex-grow-1 overflow-auto bg-my-img p-5">
-                        <div class="p-3 rounded-4 mb-4 position-relative"
+                        <div class="p-2 rounded-4 mb-4 position-relative d-flex justify-content-between"
                         v-if="contacts[selectedIndex].messages.length > 0"
                         v-for="(el,index) in contacts[selectedIndex].messages" 
                         :class="[el.status === 'sent' ? 'sent' : 'received']" :key="index" >
-                            <span>{{el.message}}</span>
-                            <small class="last-msg-preview position-absolute msg-date-position">12:00</small>
+                            <div class="p-2">
+                                <span>{{el.message}}</span>
+                                <small class="last-msg-preview position-absolute msg-date-position">12:00</small>
+                            </div>
                             <!--dropdown menù-->
-                            <div class="btn-group msg-toggle-position position-absolute">
+                            <div class="btn-group msg-toggle-position pt-3">
                                 <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="visually-hidden">Toggle Dropdown</span>
                                 </button>
