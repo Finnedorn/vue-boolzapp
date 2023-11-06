@@ -179,7 +179,8 @@ createApp({
             searchResults: '',
             selectedIndex: 0,
             newText: '',
-            newAnswer: 'ma chi ti conosce?'
+            newAnswer: 'ma chi ti conosce?',
+            loadingPg: true
         }
     },
     methods: {
@@ -215,12 +216,19 @@ createApp({
         removeFromMsg(indice) {
             const deleted = this.contacts[this.selectedIndex].messages.splice(indice, 1);
             console.log(deleted);
+        },
+        LoadingPlay() {
+            setTimeout(() => {
+                this.loadingPg = false;
+            },5000);
         }
+    },
+    mounted() {
+        this.LoadingPlay()
     },
     computed: {
         selectedContacts(){
             return this.contacts[this.selectedIndex];
         }
     }
-    
 }).mount('#app');

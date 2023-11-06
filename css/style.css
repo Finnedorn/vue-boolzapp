@@ -7,7 +7,7 @@
     --color-text-grey: #b6bbc1;
     --color-headers: #eaeaea;
     --color-contact-hover: #e9ebeb;
-    --color-light-icons: #b1b1b1;
+    --color-light-icons: #dadada;
     --color-sent-message: #d5f9ba;
     --color-notification: #8edafc;
     --background: linear-gradient(180deg, #009688 24.99%, #DCDBD3 25%);
@@ -15,6 +15,22 @@
 
 *{
     color: var(--color-dark-text);
+}
+
+/*scrollbar*/
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--color-white);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color-dark-grey); 
+    border-radius: 50px;
 }
 
 /*miscellaneous*/
@@ -47,6 +63,49 @@ img {
 
 .btn {
     --bs-btn-border-width: 0 !important;
+}
+
+.dropdown-menu {
+    --bs-dropdown-link-hover-color: none !important;
+    --bs-dropdown-link-hover-bg: none !important;
+    --bs-dropdown-link-active-color: none !important;
+    --bs-dropdown-link-active-bg: var(--color-light-icons) !important;
+}
+
+/*loading-page*/
+
+.loading-page {
+    width: 570px;
+}
+
+.loading-page>div>i,h1 {
+    font-size: 5rem;
+    color: var(--color-headers);
+}
+
+.loading-page>div>i {
+    animation-duration: 3s;
+    animation-name: chat;
+    animation-fill-mode: forwards;
+}
+
+@keyframes chat {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(20deg);}
+}
+
+.whitebar {
+    background-color: rgba(215, 215, 215, 0.688);
+    height: 10px;
+    width: 0%;
+    animation-name: bar;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes bar {
+    from {width: 0%;}
+    to {width: 100%;}
 }
 
 /*main*/
