@@ -13,6 +13,10 @@
     --background: linear-gradient(180deg, #009688 24.99%, #DCDBD3 25%);
 }
 
+*{
+    color: var(--color-dark-text);
+}
+
 /*miscellaneous*/
 
 i {
@@ -86,8 +90,15 @@ img {
     border-left: none !important;
 }
 
-
 /*main-chat*/
+
+.selected {
+    background-color: var(--color-light-icons);
+}
+
+.chat-header {
+    padding: 13px 0px;
+}
 
 .sent {
     max-width: 300px;

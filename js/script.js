@@ -216,6 +216,11 @@ createApp({
             const deleted = this.contacts[this.selectedIndex].messages.splice(indice, 1);
             console.log(deleted);
         }
+    },
+    computed: {
+        selectedContacts(){
+            return this.contacts[this.selectedIndex];
+        }
     }
     
 }).mount('#app');

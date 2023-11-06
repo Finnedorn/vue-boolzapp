@@ -25,7 +25,7 @@
                         <div class="col-12 bg-my-grey d-flex justify-content-between p-3 align-items-center border-end">
                             <div class="d-flex align-items-center">
                                 <div class="portrait">
-                                    <img src="img/avatar_1.jpg" alt="photo_avatar_of _mine">
+                                    <img src="img/avatar_io.jpg" alt="photo_avatar_of _mine">
                                 </div>
                                 <h5>
                                     Sofia
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <!--barra notifiche-->
-                        <div class="col-12 bg-my-turquoise py-3 p-3">
+                        <div class="col-12 bg-my-turquoise p-3">
                             <div class="row ps-3 align-items-center">
                                 <div class="bell text-center col-3">
                                     <i class="fa-solid fa-bell-slash pt-3"></i>
@@ -69,9 +69,9 @@
                         <!--chat contacts-->
                         <div class="col-12 flex-grow-1 overflow-y-auto h0">
                             <ul class="list-group list-group-flush overflow-auto">
-                                <li class="list-group-item list-group-item-action text-dark"
+                                <li class="list-group-item text-dark"
                                 v-for="(el,index) in contacts"
-                                :class="{'d-none' : el.visible === false}"
+                                :class="{'d-none' : el.visible === false, 'selected' : index === selectedIndex}"
                                 :key="contacts.id" 
                                 @click="chatSelector(index)">
                                     <div class="row py-2 g-0">
@@ -98,17 +98,17 @@
                 <!--main chat-->
                 <div class="col-12 col-md-8 d-flex flex-column g-0">
                     <!--header-->
-                    <div class=" bg-my-grey d-flex justify-content-between align-items-center py-3">
+                    <div class="bg-my-grey d-flex justify-content-between align-items-center chat-header">
                         <div class="d-flex align-items-center">
                             <div class="portrait ms-2">
-                                <img :src="contacts[selectedIndex].avatar" :alt="contacts[selectedIndex].avatar">
+                                <img :src="selectedContacts.avatar" :alt="selectedContacts.avatar">
                             </div>
                             <div>
                                 <h5>
-                                    {{contacts[selectedIndex].name}}
+                                    {{selectedContacts.name}}
                                 </h5>
                                 <small>
-                                    Ultimo accesso {{contacts[selectedIndex].messages[contacts[selectedIndex].messages.length -1].date}}
+                                    Ultimo accesso {{selectedContacts.messages[selectedContacts.messages.length -1].date}}
                                 </small>
                             </div>
                         </div>
@@ -125,10 +125,10 @@
                         </div>
                     </div>
                     <!--chat-->
-                    <div class="flex-grow-1 overflow-auto bg-my-img p-5">
+                    <div class="flex-grow-1 overflow-y-auto bg-my-img p-5 h0">
                         <div class="p-2 rounded-4 mb-4 position-relative d-flex justify-content-between"
-                        v-if="contacts[selectedIndex].messages.length > 0"
-                        v-for="(el,index) in contacts[selectedIndex].messages" 
+                        v-if="selectedContacts.messages.length > 0"
+                        v-for="(el,index) in selectedContacts.messages" 
                         :class="[el.status === 'sent' ? 'sent' : 'received']" :key="index" >
                             <div class="p-2">
                                 <span>{{el.message}}</span>
