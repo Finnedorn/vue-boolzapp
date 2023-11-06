@@ -165,6 +165,10 @@ img {
     background-color: var(--color-sent-message);
 }
 
+.msg-none {
+    background-color: var(--color-sent-message);
+}
+
 .msg-date-position {
     right: 40px;
     bottom: 5px;

@@ -180,12 +180,39 @@ createApp({
             selectedIndex: 0,
             newText: '',
             newAnswer: 'ma chi ti conosce?',
-            loadingPg: true
+            loadingPg: true,
+            showChat: false
         }
     },
     methods: {
+        lastMessage(array){
+            if(array.length > 0){
+                return array[array.length -1].message;
+            } else{
+                return ''
+            }
+        },
+        lastMessageTime(array){
+            if(array.length > 0){
+                return array[array.length -1].date;
+            } else {
+                return ''
+            }
+        },
+        lastAccess(){
+            const access = this.selectedContacts.messages.length;
+            if(access > 0) {
+                return this.selectedContacts.messages[access-1].date;
+            } else {
+                return 'Sconosciuto'
+            }
+        },
         chatSelector(indice) {
-            this.selectedIndex = indice
+            this.selectedIndex = indice;
+            this.showChat = true
+            this.$nextTick(() => {
+                this.$refs.messages[this.$refs.messages.length-1].scrollIntoView({behavior: 'smooth'});
+            })
         },
         addingMsg() {
             const newMessage = {
@@ -195,6 +222,9 @@ createApp({
             }
             this.contacts[this.selectedIndex].messages.push(newMessage);
             this.newText= '';
+            this.$nextTick(() => {
+                this.$refs.messages[this.$refs.messages.length-1].scrollIntoView({behavior: 'smooth'});
+            })
             setTimeout(()=> {
                 const newMessage = {
                     date: actualDateTime.now().setLocale('it').toLocaleString(actualDateTime.DATETIME_SHORT_WITH_SECONDS),
@@ -202,6 +232,9 @@ createApp({
                     status: 'received'
                 };
                 this.contacts[this.selectedIndex].messages.push(newMessage);
+                this.$nextTick(() => {
+                    this.$refs.messages[this.$refs.messages.length-1].scrollIntoView({behavior: 'smooth'});
+                })
             }, 2000)
         },
         contactFilter() {

@@ -30,7 +30,7 @@
         <div v-else class="container bg-my-white h-100">
             <div class="row flex-nowrap h-100">
                 <!--sidebar-->
-                <div class="col col-md-4 g-0">
+                <div class="col col-md-4 g-0 d-md-block" :class="{'d-none': showChat}">
                     <div class="row flex-column h-100 g-0">
                         <!--avatar-->
                         <div class="col-12 bg-my-grey d-flex justify-content-between p-3 align-items-center border-end">
@@ -75,7 +75,7 @@
                             <span class="input-group-text">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </span>
-                            <input type="text" class="form-control" placeholder="cerca..." v-model="searchResults" :keyup="contactFilter()">
+                            <input type="text" class="form-control" placeholder="cerca..." v-model.trim="searchResults" :keyup="contactFilter()">
                         </div>
                         <!--chat contacts-->
                         <div class="col-12 flex-grow-1 overflow-y-auto h0">
@@ -94,12 +94,12 @@
                                                 {{el.name}}
                                             </h5>
                                             <small class="text-my-small-grey">
-                                                {{el.messages[el.messages.length -1].message}}
+                                                {{lastMessage(el.messages)}}
                                             </small>
                                         </div>
                                         <div class="col-2">
                                             <small class="text-my-small-grey">
-                                                {{el.messages[el.messages.length -1].date}}
+                                                {{lastMessageTime(el.messages).substr(0,11)}}
                                             </small>
                                         </div>
                                     </div>
@@ -109,86 +109,89 @@
                     </div>
                 </div>
                 <!--main chat-->
-                <div class="col-12 col-md-8 d-flex flex-column g-0">
-                    <!--header-->
-                    <div class="bg-my-grey d-flex justify-content-between align-items-center chat-header">
-                        <div class="d-flex align-items-center">
-                            <div class="portrait ms-2">
-                                <img :src="selectedContacts.avatar" :alt="selectedContacts.avatar">
+                <div class="col-12 col-md-8 d-flex flex-column g-0 d-md-block" :class="{'d-none': !showChat}">
+                    <div  class="row flex-column h-100 g-0">
+                        <!--header-->
+                        <div class="bg-my-grey d-flex justify-content-between align-items-center chat-header">
+                            <div class="d-flex align-items-center">
+                                <div class="portrait ms-2">
+                                    <img :src="selectedContacts.avatar" :alt="selectedContacts.avatar">
+                                </div>
+                                <div>
+                                    <h5>
+                                        {{selectedContacts.name}}
+                                    </h5>
+                                    <small>
+                                        Ultimo accesso {{lastAccess()}}
+                                    </small>
+                                </div>
                             </div>
-                            <div>
-                                <h5>
-                                    {{selectedContacts.name}}
-                                </h5>
-                                <small>
-                                    Ultimo accesso {{selectedContacts.messages[selectedContacts.messages.length -1].date}}
-                                </small>
+                            <div class="d-flex">
+                                <a href="#" @click="showChat = false">
+                                    <i class="fa-solid fa-magnifying-glass me-4"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa-solid fa-paperclip me-4"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa-solid fa-ellipsis-vertical me-4"></i>
+                                </a>
                             </div>
                         </div>
-                        <div class="d-flex">
-                            <a href="#">
-                                <i class="fa-solid fa-magnifying-glass me-4"></i> 
-                            </a>
-                            <a href="#">
-                                <i class="fa-solid fa-paperclip me-4"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa-solid fa-ellipsis-vertical me-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!--chat-->
-                    <div class="flex-grow-1 overflow-y-auto bg-my-img p-5 h0">
-                        <div class="p-2 rounded-4 mb-4 position-relative d-flex justify-content-between"
-                        v-if="selectedContacts.messages.length > 0"
-                        v-for="(el,index) in selectedContacts.messages" 
-                        :class="[el.status === 'sent' ? 'sent' : 'received']" :key="index" >
-                            <div class="p-2">
-                                <span>
-                                    {{el.message}}
-                                </span>
-                                <small class="last-msg-preview position-absolute msg-date-position">
-                                    12:00
-                                </small>
-                            </div>
-                            <!--dropdown menù-->
-                            <div class="btn-group msg-toggle-position pt-3">
-                                <button type="button" 
-                                class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="visually-hidden">
-                                        Toggle Dropdown
+                        <!--chat-->
+                        <div class="flex-grow-1 overflow-y-auto bg-my-img p-5 h0">
+                            <div class="p-2 rounded-4 mb-4 position-relative d-flex justify-content-between"
+                            v-if="selectedContacts.messages.length > 0"
+                            ref="messages"
+                            v-for="(el,index) in selectedContacts.messages"
+                            :class="[el.status === 'sent' ? 'sent' : 'received']" :key="index" >
+                                <div class="p-2">
+                                    <span>
+                                        {{el.message}}
                                     </span>
-                                </button>
-                                <ul class="dropdown-menu rounded-3">
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            Info messaggio
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#" @click="removeFromMsg(index)">
-                                            Cancella
-                                        </a>
-                                    </li>
-                                </ul>
+                                    <small class="last-msg-preview position-absolute msg-date-position">
+                                        {{el.date.substr(11,5)}}
+                                    </small>
+                                </div>
+                                <!--dropdown menù-->
+                                <div class="btn-group msg-toggle-position pt-3">
+                                    <button type="button"
+                                    class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">
+                                            Toggle Dropdown
+                                        </span>
+                                    </button>
+                                    <ul class="dropdown-menu rounded-3">
+                                        <li>
+                                            <a class="dropdown-item" href="#">
+                                                Info messaggio
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#" @click="removeFromMsg(index)">
+                                                Cancella
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div v-else class="p-3 rounded-4 mb-4 text-center">
-                            <span>
-                                Non hai alcun messaggio con l'utente
-                            </span>
-                        </div>
+                            <div v-else class="p-3 rounded-4 mb-4 text-center msg-none w-50 m-auto">
+                                <span>
+                                    Non hai alcun messaggio con l'utente
+                                </span>
+                            </div>
                         
-                    </div>
-                    <!--chat spot-->
-                    <div class="bg-my-grey d-flex justify-content-between align-items-center p-3">
-                        <a href="#">
-                            <i class="fa-regular fa-face-smile me-2"></i>
-                        </a>
-                        <input class="form-control rounded-5" type="text" placeholder="Scrivi un messaggio..." v-model="newText" @keyup.enter="addingMsg">
-                        <a href="#">
-                            <i class="fa-solid fa-microphone ms-2"></i>
-                        </a>
+                        </div>
+                        <!--chat spot-->
+                        <div class="bg-my-grey d-flex justify-content-between align-items-center p-3">
+                            <a href="#">
+                                <i class="fa-regular fa-face-smile me-2"></i>
+                            </a>
+                            <input class="form-control rounded-5" type="text" placeholder="Scrivi un messaggio..." v-model="newText" @keyup.enter="addingMsg">
+                            <a href="#">
+                                <i class="fa-solid fa-microphone ms-2"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
