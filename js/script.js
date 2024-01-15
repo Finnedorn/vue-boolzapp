@@ -179,7 +179,7 @@ createApp({
             searchResults: '',
             selectedIndex: 0,
             newText: '',
-            newAnswer: 'ma chi ti conosce?',
+            newAnswer: 'devo andare, ci sentiamo quando esco da palestra, a dopo',
             loadingPg: true,
             showChat: false
         }
